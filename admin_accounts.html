@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head><title>Accounts</title></head>
+<body>
+  <h3>Accounts</h3>
+  <form method="POST" action="/admin/accounts/add">
+    <input name="customer_id" placeholder="Customer ID" required>
+    <input name="type" placeholder="Account Type" required>
+    <button>Add Account</button>
+  </form>
+
+  <table border="1">
+    <tr><th>ID</th><th>Customer</th><th>Number</th><th>Type</th><th>Balance</th><th>Action</th></tr>
+    {% for a in accounts %}
+    <tr>
+      <td>{{ a.AccountID }}</td>
+      <td>{{ a.FirstName }} {{ a.LastName }}</td>
+      <td>{{ a.AccountNumber }}</td>
+      <td>{{ a.AccountType }}</td>
+      <td>{{ a.Balance }}</td>
+      <td><a href="/admin/accounts/delete/{{ a.AccountID }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/admin/dashboard">Back</a></p>
+</body>
+</html>

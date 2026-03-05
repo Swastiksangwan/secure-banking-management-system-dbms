@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><title>Audit Log</title></head>
+<body>
+  <h3>Audit Log</h3>
+  <table border="1">
+    <tr><th>Account</th><th>Old</th><th>New</th><th>By</th><th>Reason</th><th>Time</th></tr>
+    {% for a in logs %}
+    <tr>
+      <td>{{ a.AccountID }}</td>
+      <td>{{ a.OldBalance }}</td>
+      <td>{{ a.NewBalance }}</td>
+      <td>{{ a.ChangedBy }}</td>
+      <td>{{ a.Reason }}</td>
+      <td>{{ a.ChangedAt }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/admin/dashboard">Back</a></p>
+</body>
+</html>

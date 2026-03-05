@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fefefe;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: none;
+      color: #007BFF;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Transaction History</h2>
+    {% if txns %}
+    <table>
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Before</th>
+          <th>After</th>
+          <th>Date</th>
+          <th>Remarks</th>
+          <th>Related Account</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in txns %}
+        <tr>
+          <td>{{ t.AccountNumber }}</td>
+          <td>{{ t.Type }}</td>
+          <td>{{ "%.2f"|format(t.Amount) }}</td>
+          <td>{{ "%.2f"|format(t.BalanceBefore) }}</td>
+          <td>{{ "%.2f"|format(t.BalanceAfter) }}</td>
+          <td>{{ t.CreatedAt.strftime("%Y-%m-%d %H:%M:%S") if t.CreatedAt else '' }}</td>
+          <td>{{ t.Remarks or '-' }}</td>
+          <td>{% if t.RelatedAccount %}{{ t.RelatedAccount }}{% else %}-{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p style="text-align:center;">No transactions found.</p>
+    {% endif %}
+    <p style="text-align:center;">
+      <a href="/">← Back</a>
+    </p>
+  </div>
+</body>
+</html>

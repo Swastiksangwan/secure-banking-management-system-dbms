@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><title>Transaction Logs</title></head>
+<body>
+  <h3>Transaction Logs</h3>
+  <table border="1">
+    <tr><th>Txn ID</th><th>Account</th><th>Type</th><th>Amount</th><th>Date</th><th>Remarks</th></tr>
+    {% for t in txns %}
+    <tr>
+      <td>{{ t.TransactionID }}</td>
+      <td>{{ t.AccountID }}</td>
+      <td>{{ t.Type }}</td>
+      <td>{{ t.Amount }}</td>
+      <td>{{ t.CreatedAt }}</td>
+      <td>{{ t.Remarks }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/admin/dashboard">Back</a></p>
+</body>
+</html>

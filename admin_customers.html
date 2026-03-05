@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head><title>Customers</title></head>
+<body>
+  <h3>Customers</h3>
+  <form method="POST" action="/admin/customers/add">
+    <input name="fname" placeholder="First Name" required>
+    <input name="lname" placeholder="Last Name">
+    <input name="email" placeholder="Email" required>
+    <input name="phone" placeholder="Phone">
+    <input name="password" placeholder="Password" required>
+    <button>Add Customer</button>
+  </form>
+
+  <table border="1">
+    <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Action</th></tr>
+    {% for c in customers %}
+    <tr>
+      <td>{{ c.CustomerID }}</td>
+      <td>{{ c.FirstName }} {{ c.LastName }}</td>
+      <td>{{ c.Email }}</td>
+      <td>{{ c.Phone }}</td>
+      <td><a href="/admin/customers/delete/{{ c.CustomerID }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/admin/dashboard">Back</a></p>
+</body>
+</html>
